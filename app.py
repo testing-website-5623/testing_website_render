@@ -5,13 +5,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 app = Flask(__name__)
-app.secret_key = "secret123"  # for session
+app.secret_key = "secret123"  # for session management
 
-# Postgres connection info (Render provides these env variables)
-DB_URL = os.environ.get("DATABASE_URL")  # Render sets this automatically
+# PostgreSQL connection from environment variable
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db():
-    conn = psycopg2.connect(DB_URL, cursor_factory=RealDictCursor)
+    conn = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
     return conn
 
 @app.route("/", methods=["GET", "POST"])
@@ -49,7 +49,7 @@ def register():
         conn.close()
     except Exception as e:
         print("Error:", e)
-        # could add flash message here
+        # Could add flash message here
 
     return redirect("/")
 
