@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 db = SQL("sqlite:///users.db")
 
-app.config["SESSION_PERMENENT"] = False
+app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
